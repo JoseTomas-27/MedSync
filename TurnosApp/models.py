@@ -80,7 +80,7 @@ class Administrador(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     
     class Meta:
-        db_table = 'Administrador'
+        db_table = 'administrador'
 
     def __str__(self):
         return self.nombre or self.rut_administrador
