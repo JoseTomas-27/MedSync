@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q$9^51d*#tb)lt1z7ma6w)c23+=3o6r3gse6)&5ei$y-r&*!#w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 SECRET_KEY = os.environ.get("SECRET_KEY", "clave-insegura-solo-local")
-ALLOWED_HOSTS = ['TurnosApp.onrender.com']
+ALLOWED_HOSTS = ["medsync-7rzd.onrender.com"]
 
 
 # Application definition
