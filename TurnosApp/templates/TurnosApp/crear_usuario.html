@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crear Usuario | HealthShift</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<style>
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(-45deg, #e0f7fa, #b2ebf2, #80deea, #4dd0e1);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .form-card {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    padding: 2.5rem 2rem;
+    color: #333;
+  }
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .form-header .fa-hospital-user {
+    font-size: 3rem;
+    color: #00796b;
+    margin-bottom: 1rem;
+  }
+  .form-header h3 {
+    font-weight: 700;
+    color: #004d40;
+  }
+  label {
+    font-weight: 600;
+    color: #004d40;
+  }
+  .form-control {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 121, 107, 0.25);
+    border-color: #00796b;
+  }
+  .btn-primary, .btn-secondary {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.75rem;
+    width: 100%;
+  }
+  .btn-primary {
+    background-color: #00796b;
+    border-color: #00796b;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  .btn-primary:hover {
+    background-color: #004d40;
+    border-color: #004d40;
+  }
+  .btn-secondary {
+    background-color: #555e6c;
+    border-color: #555e6c;
+  }
+  .btn-secondary:hover {
+    background-color: #3a414a;
+    border-color: #3a414a;
+  }
+  .alert {
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-card">
+  <div class="form-header">
+    <i class="fas fa-hospital-user"></i>
+    <h3>Crear Nuevo Usuario</h3>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_rut" class="form-label">RUT</label>
+      {{ form.rut }}
+    </div>
+    <div class="mb-3">
+      <label for="id_nombre" class="form-label">Nombre</label>
+      {{ form.nombre }}
+    </div>
+    <div class="mb-3">
+      <label for="id_apellido" class="form-label">Apellido</label>
+      {{ form.apellido }}
+    </div>
+    <div class="mb-3">
+      <label for="id_correo" class="form-label">Correo Electrónico</label>
+      {{ form.correo }}
+    </div>
+    <div class="mb-3">
+      <label for="id_pass_field" class="form-label">Contraseña</label>
+      {{ form.pass_field }}
+    </div>
+    <div class="mb-3">
+      <label for="id_rol" class="form-label">Rol</label>
+      {{ form.rol }}
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Usuario</button>
+  </form>
+
+  <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Volver al Dashboard</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

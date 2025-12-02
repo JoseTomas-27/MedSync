@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Eliminación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        body { background-color: #f5f6fa; font-family: 'Inter', sans-serif; }
+        .sidebar { min-width: 240px; background: #fff; border-right: 1px solid #eee; height: 100vh; position: fixed; left: 0; top: 0; padding: 20px 15px; }
+        .sidebar .nav-link { color: #555; font-weight: 500; border-radius: 8px; margin-bottom: 5px; padding: 10px 15px; }
+        .sidebar .nav-link.active { background: #e9f3ff; color: #1976d2; font-weight: bold; }
+        .page-content { margin-left: 240px; padding: 40px 30px; }
+        .user-info { text-align: right; }
+        .user-info h5 { margin: 0; font-size: 1rem; font-weight: bold; }
+        .user-info p { margin: 0; font-size: 0.85rem; color: #6c757d; }
+        .rounded-card { border: none; border-radius: 12px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 24px; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+<div class="sidebar d-flex flex-column">
+    <h5 class="text-center mb-4">MedSync</h5>
+    <nav class="nav flex-column w-100">
+        <a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-home me-2"></i>Inicio</a>
+        <a class="nav-link" href="{% url 'salas' %}"><i class="fas fa-person-booth me-2"></i>Salas</a>
+        <a class="nav-link" href="{% url 'pacientes' %}"><i class="fas fa-user-injured me-2"></i>Pacientes</a>
+        <a class="nav-link" href="{% url 'personal' %}"><i class="fas fa-user-nurse me-2"></i>Personal</a>
+        <a class="nav-link" href="{% url 'horarios' %}"><i class="fas fa-clock me-2"></i>Horarios</a>
+        <a class="nav-link active" href="{% url 'reportes' %}"><i class="fas fa-chart-line me-2"></i>Reportes</a>
+    </nav>
+    <div class="mt-auto">
+        <a href="{% url 'logout' %}" class="nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">Eliminar Reporte</h3>
+    </div>
+
+    <div class="rounded-card">
+        <p>¿Estás seguro de que quieres eliminar el siguiente reporte?</p>
+        <div class="alert alert-warning">
+            <strong>Autor:</strong> {{ reporte.autor }}<br>
+            <strong>Fecha:</strong> {{ reporte.fecha }}<br>
+            <strong>Contenido:</strong> {{ reporte.contenido }}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'reportes' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+

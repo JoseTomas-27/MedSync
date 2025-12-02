@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | MedSync</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Incluimos Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        /* Definición de la animación del fondo */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Fondo de gradiente animado */
+            background: linear-gradient(-45deg, #e0f7fa, #b2ebf2, #80deea, #4dd0e1);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            /* Efecto "Frosted Glass" (vidrio esmerilado) */
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 2.5rem;
+            color: #333; /* Texto más oscuro para legibilidad */
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        /* Estilo para el ícono de hospital */
+        .login-header .fa-hospital-user {
+            font-size: 3rem;
+            color: #00796b; /* Un tono verde azulado profesional */
+            margin-bottom: 1rem;
+        }
+
+        .login-header h3 {
+            font-weight: 700;
+            color: #004d40; /* Tono más oscuro para el título */
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.5); /* Ligeramente transparente */
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 121, 107, 0.25); /* Sombra de foco con color temático */
+            border-color: #00796b;
+        }
+
+        .btn-primary {
+            background-color: #00796b;
+            border-color: #00796b;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #004d40;
+            border-color: #004d40;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .register-link a {
+            color: #004d40;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="login-header">
+            <i class="fas fa-hospital-user"></i>
+            <h3>Bienvenido a MedSync</h3>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Bloque para mostrar mensajes de error -->
+            {% if messages %}
+  {% for message in messages %}
+    {% if "Bienvenido" not in message|stringformat:"s" and "Reporte" not in message|stringformat:"s" %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+
+            <div class="mb-3">
+                <label for="rut" class="form-label fw-bold">RUT</label>
+                <input type="text" name="rut" id="rut" class="form-control" placeholder="12.345.678-9" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Contraseña</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3">Iniciar Sesión</button>
+        </form>
+        
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
+        </div>
+    </div>
+
+    <!-- Script de Bootstrap para que funcionen las alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
