@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q$9^51d*#tb)lt1z7ma6w)c23+=3o6r3gse6)&5ei$y-r&*!#w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['TurnosApp.onrender.com']
 
 
 # Application definition
@@ -47,6 +47,7 @@ AUTH_USER_MODEL = "TurnosApp.Administrador"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -123,6 +124,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # 🔐 Configuración de autenticación personalizada
 LOGIN_URL = '/login/'              # Ruta donde está tu formulario de login
 LOGIN_REDIRECT_URL = '/dashboard/' # A dónde se redirige tras iniciar sesión
