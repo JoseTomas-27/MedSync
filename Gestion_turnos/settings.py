@@ -25,7 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-q$9^51d*#tb)lt1z7ma6w)c23+=3o6r3gse6)&5ei$y-r&*!#w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Permite activar el modo Debug desde las variables de entorno de Render
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 SECRET_KEY = os.environ.get("SECRET_KEY", "clave-insegura-solo-local")
 ALLOWED_HOSTS = ["medsync-7rzd.onrender.com"]
 
